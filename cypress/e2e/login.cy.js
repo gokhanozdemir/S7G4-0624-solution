@@ -20,6 +20,14 @@ describe("login", () => {
     cy.visit("http://localhost:5174/");
   });
 
+  it("hatalı eposta girişi yapınca buton disabled olmalı", () => {
+    cy.get('input[name="password"]').type("1234");
+    cy.get('input[name="terms"]').click();
+    cy.get('input[name="email"]').type("asd@adfacom");
+    const submit = cy.get('[data-cy="login-submit"]');
+    submit.should("be.disabled");
+  });
+
   it("hatalı giriş yapınca error sayfasına yönlendiriyor", () => {
     cy.get('input[name="email"]').type("asd@adfa.com");
     cy.get('input[name="password"]').type("1234");
