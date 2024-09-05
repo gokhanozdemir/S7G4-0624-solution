@@ -27,6 +27,13 @@ describe("login", () => {
     const submit = cy.get('[data-cy="login-submit"]');
     submit.should("be.disabled");
   });
+  it("hatalı kısa şifre girişi yapınca buton disabled olmalı", () => {
+    cy.get('input[name="terms"]').click();
+    cy.get('input[name="email"]').type("asd@adfa.com");
+    cy.get('input[name="password"]').type("123");
+    const submit = cy.get('[data-cy="login-submit"]');
+    submit.should("be.disabled");
+  });
 
   it("hatalı giriş yapınca error sayfasına yönlendiriyor", () => {
     cy.get('input[name="email"]').type("asd@adfa.com");
